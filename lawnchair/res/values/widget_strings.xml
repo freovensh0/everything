@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_clock_label">Clock</string>
+    <string name="widget_clock_description">Time and date on a card</string>
+</resources>

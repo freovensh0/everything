@@ -199,6 +199,18 @@
                 android:resource="@xml/smartspace_appwidget_info" />
         </receiver>
 
+        <receiver
+            android:name="app.lawnchair.widgets.ClockWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_clock_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_clock_info" />
+        </receiver>
+
         <meta-data
             android:name="xyz.paphonb.quickstepswitcher.minSdk"
             android:value="${quickstepMinSdk}" />
