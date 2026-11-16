@@ -58,41 +58,20 @@ class WeatherWidgetProvider : AppWidgetProvider() {
             }
         }
 
-        private fun views(context: Context, city: String, weather: Weather): RemoteViews =
-            RemoteViews(context.packageName, R.layout.widget_weather).apply {
+        private fun views(context: Context, city: String, weather: Weather): RemoteViews {
+            val glyphPx = (56 * context.resources.displayMetrics.density).toInt()
+            return RemoteViews(context.packageName, R.layout.widget_weather).apply {
                 setTextViewText(R.id.weather_city, city)
                 setTextViewText(R.id.weather_temp, "${weather.temperature.roundToInt()}°")
-                setTextViewText(R.id.weather_condition, weather.condition)
-                setTextViewText(
-                    R.id.weather_range,
-                    "${weather.minimum.roundToInt()}° / ${weather.maximum.roundToInt()}°",
-                )
+                setImageViewBitmap(R.id.weather_glyph, WeatherGlyph.render(context, glyphPx, weather.code))
             }
+        }
     }
 }
 
 data class Place(val name: String, val latitude: Double, val longitude: Double)
 
-data class Weather(
-    val temperature: Double,
-    val minimum: Double,
-    val maximum: Double,
-    val code: Int,
-) {
-    val condition: String
-        get() = when (code) {
-            0 -> "Clear"
-            1, 2 -> "Partly cloudy"
-            3 -> "Overcast"
-            45, 48 -> "Fog"
-            in 51..57 -> "Drizzle"
-            in 61..67 -> "Rain"
-            in 71..77, 85, 86 -> "Snow"
-            in 80..82 -> "Showers"
-            in 95..99 -> "Thunderstorm"
-            else -> "Cloudy"
-        }
-}
+data class Weather(val temperature: Double, val code: Int)
 
 object WeatherCatalog {
 
@@ -136,15 +115,10 @@ object WeatherCatalog {
     fun fetch(place: Place): Weather {
         val url = "https://api.open-meteo.com/v1/forecast" +
             "?latitude=${place.latitude}&longitude=${place.longitude}" +
-            "&current=temperature_2m,weather_code" +
-            "&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto"
-        val json = JSONObject(http(url))
-        val current = json.getJSONObject("current")
-        val daily = json.getJSONObject("daily")
+            "&current=temperature_2m,weather_code&timezone=auto"
+        val current = JSONObject(http(url)).getJSONObject("current")
         return Weather(
             temperature = current.getDouble("temperature_2m"),
-            minimum = daily.getJSONArray("temperature_2m_min").getDouble(0),
-            maximum = daily.getJSONArray("temperature_2m_max").getDouble(0),
             code = current.getInt("weather_code"),
         )
     }

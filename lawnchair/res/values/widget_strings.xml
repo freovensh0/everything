@@ -10,4 +10,6 @@
     <string name="widget_weather_failed">City not found</string>
     <string name="widget_camera_label">Camera</string>
     <string name="widget_camera_description">Camera shortcut card</string>
+    <string name="widget_digital_clock_label">Digital clock</string>
+    <string name="widget_digital_clock_description">Dot-matrix time</string>
 </resources>
