@@ -58,6 +58,10 @@ fun AdvancedIconPreferences(
                 adapter = prefs.shadowBGIcons.getAdapter(),
                 label = stringResource(id = R.string.shadow_bg_icons_label),
             )
+            SwitchPreference(
+                adapter = prefs.translucentIcons.getAdapter(),
+                label = stringResource(id = R.string.translucent_icons_label),
+            )
         }
 
         PreferenceGroup(

@@ -162,10 +162,18 @@ class LawnchairIconProvider @Inject constructor(
         val baseIcon = iconPackIcon ?: super.getIcon(info, appInfo, iconDpi)
 
         if (!themedIconsEnabled || iconEntry == null) {
-            return baseIcon
+            return baseIcon.withTranslucency()
         }
 
-        return resolveThemedIcon(packageName, componentName, iconEntry, iconDpi) ?: baseIcon
+        return (resolveThemedIcon(packageName, componentName, iconEntry, iconDpi) ?: baseIcon)
+            .withTranslucency()
+    }
+
+    private fun Drawable.withTranslucency(): Drawable {
+        if (prefs.translucentIcons.get()) {
+            alpha = (TRANSLUCENT_ALPHA * 255).toInt()
+        }
+        return this
     }
 
     private fun resolveThemedIcon(
@@ -435,5 +443,6 @@ class LawnchairIconProvider @Inject constructor(
 
     companion object {
         const val TAG = "LawnchairIconProvider"
+        private const val TRANSLUCENT_ALPHA = 0.78f
     }
 }

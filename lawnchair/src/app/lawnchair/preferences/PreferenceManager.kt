@@ -85,6 +85,7 @@ class PreferenceManager @Inject constructor(
     val wrapAdaptiveIcons = BoolPref("prefs_wrapAdaptive", true)
     val transparentIconBackground = BoolPref("prefs_transparentIconBackground", false)
     val shadowBGIcons = BoolPref("pref_shadowBGIcons", true)
+    val translucentIcons = BoolPref("pref_translucentIcons", false, reloadIcons)
     val addIconToHome = BoolPref("pref_add_icon_to_home", true)
 
     private val isPhone: Boolean get() = deviceType == InvariantDeviceProfile.TYPE_PHONE
