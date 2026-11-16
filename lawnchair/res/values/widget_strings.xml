@@ -2,4 +2,10 @@
 <resources>
     <string name="widget_clock_label">Clock</string>
     <string name="widget_clock_description">Time and date on a card</string>
+    <string name="widget_weather_label">Weather</string>
+    <string name="widget_weather_description">Current conditions and today\'s range</string>
+    <string name="widget_weather_city_hint">City</string>
+    <string name="widget_weather_save">Save</string>
+    <string name="widget_weather_unknown">Set a city</string>
+    <string name="widget_weather_failed">City not found</string>
 </resources>
