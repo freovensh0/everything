@@ -60,7 +60,7 @@ class ClockWidgetProvider : AppWidgetProvider() {
         manager.updateAppWidget(
             appWidgetId,
             RemoteViews(context.packageName, R.layout.widget_clock).apply {
-                setImageViewBitmap(R.id.clock_image, Dial.render(context, size.dp(context)))
+                setImageViewBitmap(R.id.clock_image, Dial.render(context, size.dp(context).coerceAtMost(MAX_BITMAP_PX)))
                 setOnClickPendingIntent(R.id.clock_root, alarmsIntent(context))
             },
         )
@@ -99,6 +99,7 @@ class ClockWidgetProvider : AppWidgetProvider() {
     companion object {
         private const val ACTION_TICK = "app.lawnchair.widgets.CLOCK_TICK"
         private const val MIN_SIZE_DP = 160
+        private const val MAX_BITMAP_PX = 480
     }
 }
 
@@ -109,7 +110,8 @@ class ClockWidgetProvider : AppWidgetProvider() {
 private object Dial {
 
     fun render(context: Context, size: Int): Bitmap {
-        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        // RemoteViews caps a bitmap at ~1MB; RGB_565 keeps a 480px dial well under it.
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565)
         val canvas = Canvas(bitmap)
         val center = size / 2f
         val radius = size / 2f
