@@ -223,6 +223,18 @@
                 android:resource="@xml/widget_weather_info" />
         </receiver>
 
+        <receiver
+            android:name="app.lawnchair.widgets.CameraWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_camera_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_camera_info" />
+        </receiver>
+
         <activity
             android:name="app.lawnchair.widgets.WeatherWidgetConfigActivity"
             android:exported="true"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <path
+        android:fillColor="@color/widget_card_text"
+        android:pathData="M30,24 H58 L66,34 H84 V76 H12 V34 H22 Z" />
+    <path
+        android:fillColor="@color/widget_card_bg"
+        android:pathData="M48,40 m-13,0 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+</vector>

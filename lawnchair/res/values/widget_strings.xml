@@ -8,4 +8,6 @@
     <string name="widget_weather_save">Save</string>
     <string name="widget_weather_unknown">Set a city</string>
     <string name="widget_weather_failed">City not found</string>
+    <string name="widget_camera_label">Camera</string>
+    <string name="widget_camera_description">Camera shortcut card</string>
 </resources>
