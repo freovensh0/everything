@@ -17,6 +17,10 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: gradle/actions/setup-gradle@v6
+      - name: Use a stable debug keystore
+        run: |
+          mkdir -p "$HOME/.android"
+          cp ci/debug.keystore "$HOME/.android/debug.keystore"
       - name: Build debug APK
         run: ./gradlew assembleLawnWithQuickstepGithubDebug
       - uses: actions/upload-artifact@v7
